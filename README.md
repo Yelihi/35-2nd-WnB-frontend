@@ -74,6 +74,7 @@
   <br />
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+<<<<<<< HEAD
 
 <h2 id="담당하였던part"> :large_blue_diamond: 담당하였던 Part</h2>
 <br />
@@ -317,3 +318,6 @@ useEffect(() => {
 <br />
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+=======
+
+>>>>>>> upstream/main

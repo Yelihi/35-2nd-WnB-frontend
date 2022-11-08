@@ -4,53 +4,26 @@ import ProfileContainer from './modal/ProfileContainer';
 import ProfileLoginContainer from './modal/ProfileLoginContainer';
 import { fadeIn, shadow } from '../../styles/animation';
 import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-const BeforeSearch = ({
-  startDate,
-  endDate,
-  location,
-  guest,
-  toggleNavbar,
-  toggleNav,
-  profileModal,
-  setProfileModal,
-  clickUserInfo,
-  isToken,
-  setIsToken,
-  modalIsOpen,
-  setModalIsOpen,
-  switchModal,
-  reroad,
-}) => {
+import { clickSearchBar, clickUserInfoButton } from '../../reducers/nav';
+
+const BeforeSearch = ({ startDate, endDate, location, guest, reroad }) => {
+  const dispatch = useDispatch();
+  const { isToken, isClickSearch, isClickUserInfoButton } = useSelector(
+    state => state.nav
+  );
   let uselocation = useLocation();
   let is_detail = uselocation.pathname;
 
   const swtichProfileModal = {
-    1: (
-      <ProfileContainer
-        profileModal={profileModal}
-        setProfileModal={setProfileModal}
-        modalIsOpen={modalIsOpen}
-        setModalIsOpen={setModalIsOpen}
-        switchModal={switchModal}
-        isToken={isToken}
-        setIsToken={setIsToken}
-      />
-    ),
-    2: (
-      <ProfileLoginContainer
-        profileModal={profileModal}
-        setProfileModal={setProfileModal}
-        isToken={isToken}
-        setIsToken={setIsToken}
-        switchModal={switchModal}
-      />
-    ),
+    1: <ProfileContainer />,
+    2: <ProfileLoginContainer />,
   };
 
   return (
     <SectionBefore
-      className={toggleNavbar ? 'toggle_open' : null}
+      className={isClickSearch ? 'toggle_open' : null}
       detail={is_detail}
     >
       <OnClickSearchSection
@@ -61,7 +34,7 @@ const BeforeSearch = ({
             <Logo src="/images/we&B_logo.png" alt="logo" />
           </LogoContainer>
           <MenuContainer>
-            <SmallSearchBox onClick={toggleNav}>
+            <SmallSearchBox onClick={() => dispatch(clickSearchBar())}>
               <SmallSearchMenuContainer>
                 <Menu>
                   {location === '지도표시지역' ? '어디든지' : location}
@@ -96,7 +69,9 @@ const BeforeSearch = ({
               <i className="bx bx-world" />
             </UserIconContainer>
             <InfoPositionSet>
-              <UserInfoContainer onClick={clickUserInfo}>
+              <UserInfoContainer
+                onClick={() => dispatch(clickUserInfoButton())}
+              >
                 <UserInfoMenu>
                   <i className="bx bx-menu" />
                 </UserInfoMenu>
@@ -104,7 +79,7 @@ const BeforeSearch = ({
                   <i className="bx bxs-user-circle" />
                 </UseerInfoIcon>
               </UserInfoContainer>
-              {profileModal &&
+              {isClickUserInfoButton &&
                 (isToken ? swtichProfileModal['2'] : swtichProfileModal['1'])}
             </InfoPositionSet>
           </UserSection>
