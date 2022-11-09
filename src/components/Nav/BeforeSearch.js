@@ -12,11 +12,10 @@ import {
   reLoadPage,
 } from '../../reducers/nav';
 
-const BeforeSearch = ({ startDate, endDate, location, guest }) => {
+const BeforeSearch = ({ startDate, endDate, guest }) => {
   const dispatch = useDispatch();
-  const { isToken, isClickSearch, isClickUserInfoButton } = useSelector(
-    state => state.nav
-  );
+  const { isToken, isClickSearch, isClickUserInfoButton, location } =
+    useSelector(state => state.nav);
   let uselocation = useLocation();
   let is_detail = uselocation.pathname;
 

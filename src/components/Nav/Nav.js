@@ -13,7 +13,6 @@ const Nav = () => {
   const { isToken } = useSelector(state => state.nav);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [location, setLocation] = useState('지도표시지역');
   const [guest, setGuest] = useState(0);
   const modalRef = useRef();
 
@@ -49,9 +48,7 @@ const Nav = () => {
         <BeforeSearch
           startDate={startDate}
           endDate={endDate}
-          location={location}
           guest={guest}
-          setLocation={setLocation}
           onChange={onChange}
           increseNum={increseNum}
           decreseNum={decreseNum}
@@ -59,9 +56,7 @@ const Nav = () => {
         <OnClickSearch
           startDate={startDate}
           endDate={endDate}
-          location={location}
           guest={guest}
-          setLocation={setLocation}
           onChange={onChange}
           increseNum={increseNum}
           decreseNum={decreseNum}

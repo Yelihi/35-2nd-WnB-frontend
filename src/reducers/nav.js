@@ -21,6 +21,8 @@ export const SWITCH_TO_LOGIN_MODAL = 'SWITCH_TO_LOGIN_MODAL';
 
 export const WINDOW_RELOAD = 'WINDOW_RELOAD';
 
+export const SET_LOCATION = 'SET_LOCATION';
+
 export const clickSearchBar = () => ({
   type: CLICK_SEARCHBAR,
 });
@@ -39,6 +41,11 @@ export const switchModal = () => ({
 
 export const reLoadPage = () => ({
   type: WINDOW_RELOAD,
+});
+
+export const setLocation = data => ({
+  type: SET_LOCATION,
+  data,
 });
 
 export default (state = initialState, action) => {
@@ -71,6 +78,10 @@ export default (state = initialState, action) => {
       }
       case WINDOW_RELOAD: {
         window.location.replace('/');
+        break;
+      }
+      case SET_LOCATION: {
+        draft.location = action.data;
         break;
       }
     }

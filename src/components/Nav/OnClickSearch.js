@@ -16,9 +16,7 @@ import {
 const OnClickSearch = ({
   startDate,
   endDate,
-  location,
   guest,
-  setLocation,
   onChange,
   increseNum,
   decreseNum,
@@ -81,9 +79,7 @@ const OnClickSearch = ({
           <Search
             startDate={startDate}
             endDate={endDate}
-            location={location}
             guest={guest}
-            setLocation={setLocation}
             onChange={onChange}
             increseNum={increseNum}
             decreseNum={decreseNum}

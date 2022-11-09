@@ -1,7 +1,11 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-const Location = ({ setLocation }) => {
+import { setLocation } from '../../../reducers/nav';
+
+const Location = () => {
+  const dispatch = useDispatch();
   return (
     <ModalLocation>
       <LocationContainer>
@@ -11,7 +15,7 @@ const Location = ({ setLocation }) => {
             <LocationImg
               src="/images/gyeonggido.png"
               alt="location"
-              onClick={() => setLocation('경기도')}
+              onClick={() => dispatch(setLocation('경기도'))}
             />
             <ImgDoc>경기도</ImgDoc>
           </ImgContainer>
@@ -19,7 +23,7 @@ const Location = ({ setLocation }) => {
             <LocationImg
               src="/images/incheon.png"
               alt="location"
-              onClick={() => setLocation('인천')}
+              onClick={() => dispatch(setLocation('인천'))}
             />
             <ImgDoc>인천</ImgDoc>
           </ImgContainer>

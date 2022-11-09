@@ -6,28 +6,26 @@ import Location from './modal/Location';
 import Calender from './modal/Calender';
 import GuestType from './modal/GuestType';
 import { BASE_URL } from '../Config/Config';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { clickSearchBar } from '../../reducers/nav';
 
 const Search = ({
   startDate,
   endDate,
-  location,
   guest,
-  setLocation,
   onChange,
   increseNum,
   decreseNum,
   modalRef,
 }) => {
   const dispatch = useDispatch();
+  const { location } = useSelector(state => state.nav);
   const [dateModalIsOpen, setDateModalIsOpen] = useState(false);
   const [locationModalIsOpen, setLocationModalIsOpen] = useState(false);
   const [guestModalIsOpen, setGuestModalIsOpen] = useState(false);
   const [currentId, setCurrentId] = useState(0);
   const navigate = useNavigate();
-  // const modalRef = useRef();
 
   const clickHandler = id => {
     setCurrentId(id);
@@ -90,13 +88,7 @@ const Search = ({
   };
 
   const ModalComponent = {
-    1: (
-      <Location
-        startDate={startDate}
-        endDate={endDate}
-        setLocation={setLocation}
-      />
-    ),
+    1: <Location startDate={startDate} endDate={endDate} />,
     2: <Calender startDate={startDate} endDate={endDate} onChange={onChange} />,
     3: (
       <GuestType
