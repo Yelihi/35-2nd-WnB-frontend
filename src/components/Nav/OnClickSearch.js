@@ -7,7 +7,11 @@ import ProfileLoginContainer from './modal/ProfileLoginContainer';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { clickSearchBar, clickUserInfoButton } from '../../reducers/nav';
+import {
+  clickSearchBar,
+  clickUserInfoButton,
+  reLoadPage,
+} from '../../reducers/nav';
 
 const OnClickSearch = ({
   startDate,
@@ -19,7 +23,6 @@ const OnClickSearch = ({
   increseNum,
   decreseNum,
   modalRef,
-  reroad,
 }) => {
   const dispatch = useDispatch();
   const { isToken, isClickSearch, isClickUserInfoButton } = useSelector(
@@ -45,7 +48,7 @@ const OnClickSearch = ({
         className={is_detail === '/detail' ? 'detail_width' : null}
       >
         <TopNavSection>
-          <LogoContainer onClick={reroad}>
+          <LogoContainer onClick={() => dispatch(reLoadPage())}>
             <Logo src="/images/we&B_logo.png" alt="logo" />
           </LogoContainer>
           <MenuContainer>

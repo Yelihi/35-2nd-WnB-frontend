@@ -1,6 +1,7 @@
 import { produce } from 'immer';
 
 const initialState = {
+  location: '지도표시지역',
   isToken: false,
   isClickSearch: true,
   isClickUserInfoButton: false,
@@ -36,6 +37,10 @@ export const switchModal = () => ({
   type: SWITCH_TO_LOGIN_MODAL,
 });
 
+export const reLoadPage = () => ({
+  type: WINDOW_RELOAD,
+});
+
 export default (state = initialState, action) => {
   return produce(state, draft => {
     switch (action.type) {
@@ -62,6 +67,10 @@ export default (state = initialState, action) => {
       case SWITCH_TO_LOGIN_MODAL: {
         draft.isOpenLoginModal = !draft.isOpenLoginModal;
         draft.isClickUserInfoButton = !draft.isClickUserInfoButton;
+        break;
+      }
+      case WINDOW_RELOAD: {
+        window.location.replace('/');
         break;
       }
     }

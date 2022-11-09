@@ -29,10 +29,6 @@ const Nav = () => {
     }
   }, [isToken]);
 
-  const reroad = () => {
-    window.location.replace('/');
-  };
-
   const onChange = dates => {
     const [start, end] = dates;
     setStartDate(start);
@@ -59,7 +55,6 @@ const Nav = () => {
           onChange={onChange}
           increseNum={increseNum}
           decreseNum={decreseNum}
-          reroad={reroad}
         />
         <OnClickSearch
           startDate={startDate}
@@ -71,7 +66,6 @@ const Nav = () => {
           increseNum={increseNum}
           decreseNum={decreseNum}
           modalRef={modalRef}
-          reroad={reroad}
         />
       </div>
       {localStorage.getItem('key') ? <SignModal /> : <LoginModal />}

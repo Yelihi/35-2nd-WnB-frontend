@@ -6,9 +6,13 @@ import { fadeIn, shadow } from '../../styles/animation';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { clickSearchBar, clickUserInfoButton } from '../../reducers/nav';
+import {
+  clickSearchBar,
+  clickUserInfoButton,
+  reLoadPage,
+} from '../../reducers/nav';
 
-const BeforeSearch = ({ startDate, endDate, location, guest, reroad }) => {
+const BeforeSearch = ({ startDate, endDate, location, guest }) => {
   const dispatch = useDispatch();
   const { isToken, isClickSearch, isClickUserInfoButton } = useSelector(
     state => state.nav
@@ -30,7 +34,7 @@ const BeforeSearch = ({ startDate, endDate, location, guest, reroad }) => {
         className={is_detail.includes('detail') ? 'detail_width' : null}
       >
         <TopNavSection>
-          <LogoContainer onClick={reroad}>
+          <LogoContainer onClick={() => dispatch(reLoadPage())}>
             <Logo src="/images/we&B_logo.png" alt="logo" />
           </LogoContainer>
           <MenuContainer>
