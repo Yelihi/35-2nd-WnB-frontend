@@ -13,7 +13,6 @@ const Nav = () => {
   const { isToken } = useSelector(state => state.nav);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [guest, setGuest] = useState(0);
   const modalRef = useRef();
 
   useEffect(() => {
@@ -34,32 +33,18 @@ const Nav = () => {
     setEndDate(end);
   };
 
-  const increseNum = () => {
-    setGuest(prev => prev + 1);
-  };
-
-  const decreseNum = () => {
-    setGuest(prev => prev - 1);
-  };
-
   return (
     <>
       <div>
         <BeforeSearch
           startDate={startDate}
           endDate={endDate}
-          guest={guest}
           onChange={onChange}
-          increseNum={increseNum}
-          decreseNum={decreseNum}
         />
         <OnClickSearch
           startDate={startDate}
           endDate={endDate}
-          guest={guest}
           onChange={onChange}
-          increseNum={increseNum}
-          decreseNum={decreseNum}
           modalRef={modalRef}
         />
       </div>

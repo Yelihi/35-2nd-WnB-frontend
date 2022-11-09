@@ -13,15 +13,7 @@ import {
   reLoadPage,
 } from '../../reducers/nav';
 
-const OnClickSearch = ({
-  startDate,
-  endDate,
-  guest,
-  onChange,
-  increseNum,
-  decreseNum,
-  modalRef,
-}) => {
+const OnClickSearch = ({ startDate, endDate, onChange, modalRef }) => {
   const dispatch = useDispatch();
   const { isToken, isClickSearch, isClickUserInfoButton } = useSelector(
     state => state.nav
@@ -79,10 +71,7 @@ const OnClickSearch = ({
           <Search
             startDate={startDate}
             endDate={endDate}
-            guest={guest}
             onChange={onChange}
-            increseNum={increseNum}
-            decreseNum={decreseNum}
             modalRef={modalRef}
           />
         </BottomNavSection>

@@ -10,17 +10,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { clickSearchBar } from '../../reducers/nav';
 
-const Search = ({
-  startDate,
-  endDate,
-  guest,
-  onChange,
-  increseNum,
-  decreseNum,
-  modalRef,
-}) => {
+const Search = ({ startDate, endDate, onChange, modalRef }) => {
   const dispatch = useDispatch();
-  const { location } = useSelector(state => state.nav);
+  const { location, guestCount } = useSelector(state => state.nav);
   const [dateModalIsOpen, setDateModalIsOpen] = useState(false);
   const [locationModalIsOpen, setLocationModalIsOpen] = useState(false);
   const [guestModalIsOpen, setGuestModalIsOpen] = useState(false);
@@ -31,7 +23,7 @@ const Search = ({
     setCurrentId(id);
   };
 
-  const disabled = guest > 0;
+  const disabled = guestCount > 0;
 
   const overLayClick = e => {
     if (modalRef.current === e.target) {
@@ -70,7 +62,7 @@ const Search = ({
       ? `&check_out=${toStringByFormatting(endDate, '-')}`
       : '';
     const selectLocation = location ? `&address=${location}` : '';
-    const totalGuest = guest ? `&maximum_occupancy=${guest}` : '';
+    const totalGuest = guestCount ? `&maximum_occupancy=${guestCount}` : '';
 
     navigate(`/list?${startDay}${endDay}${selectLocation}${totalGuest}`);
 
@@ -90,14 +82,7 @@ const Search = ({
   const ModalComponent = {
     1: <Location startDate={startDate} endDate={endDate} />,
     2: <Calender startDate={startDate} endDate={endDate} onChange={onChange} />,
-    3: (
-      <GuestType
-        guest={guest}
-        increseNum={increseNum}
-        decreseNum={decreseNum}
-        disabled={disabled}
-      />
-    ),
+    3: <GuestType disabled={disabled} />,
   };
 
   return (
@@ -155,7 +140,7 @@ const Search = ({
         >
           <DatePickerLabel>여행자</DatePickerLabel>
           <SearchBarSpan>
-            {guest !== 0 ? `성인 ${guest}명` : '게스트 추가'}
+            {guestCount !== 0 ? `성인 ${guestCount}명` : '게스트 추가'}
           </SearchBarSpan>
           <IconContainer onClick={toSearchUserInfo}>
             <i class="bx bx-search" />

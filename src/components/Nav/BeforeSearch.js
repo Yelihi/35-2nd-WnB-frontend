@@ -12,10 +12,15 @@ import {
   reLoadPage,
 } from '../../reducers/nav';
 
-const BeforeSearch = ({ startDate, endDate, guest }) => {
+const BeforeSearch = ({ startDate, endDate }) => {
   const dispatch = useDispatch();
-  const { isToken, isClickSearch, isClickUserInfoButton, location } =
-    useSelector(state => state.nav);
+  const {
+    isToken,
+    isClickSearch,
+    isClickUserInfoButton,
+    location,
+    guestCount,
+  } = useSelector(state => state.nav);
   let uselocation = useLocation();
   let is_detail = uselocation.pathname;
 
@@ -58,7 +63,7 @@ const BeforeSearch = ({ startDate, endDate, guest }) => {
               <Separation />
               <SmallSearchMenuContainer>
                 <OnlineMenu>
-                  {guest !== 0 ? `성인 ${guest}명` : '게스트 추가'}
+                  {guestCount !== 0 ? `성인 ${guestCount}명` : '게스트 추가'}
                 </OnlineMenu>
                 <SearchCircle>
                   <i className="bx bx-search" />

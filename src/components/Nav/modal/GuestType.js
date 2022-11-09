@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 
-const GuestType = ({ decreseNum, increseNum, disabled, guest }) => {
+import { decreseCountGuest, addCountGuest } from '../../../reducers/nav';
+
+const GuestType = ({ disabled }) => {
+  const dispatch = useDispatch();
+  const { guestCount } = useSelector(state => state.nav);
   return (
     <ModalGuest>
       <GuestSection>
@@ -11,11 +16,16 @@ const GuestType = ({ decreseNum, increseNum, disabled, guest }) => {
             <GuestFilter>만 13세 이상</GuestFilter>
           </GuestInfo>
           <GuestNumber>
-            <GuestNumChange onClick={decreseNum} disabled={!disabled}>
+            <GuestNumChange
+              onClick={() => dispatch(decreseCountGuest())}
+              disabled={!disabled}
+            >
               -
             </GuestNumChange>
-            <GuestSpan>{guest}</GuestSpan>
-            <GuestNumChange onClick={increseNum}>+</GuestNumChange>
+            <GuestSpan>{guestCount}</GuestSpan>
+            <GuestNumChange onClick={() => dispatch(addCountGuest())}>
+              +
+            </GuestNumChange>
           </GuestNumber>
         </GuestContainer>
       </GuestSection>

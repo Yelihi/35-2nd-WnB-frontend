@@ -2,6 +2,7 @@ import { produce } from 'immer';
 
 const initialState = {
   location: '지도표시지역',
+  guestCount: 0,
   isToken: false,
   isClickSearch: true,
   isClickUserInfoButton: false,
@@ -22,6 +23,9 @@ export const SWITCH_TO_LOGIN_MODAL = 'SWITCH_TO_LOGIN_MODAL';
 export const WINDOW_RELOAD = 'WINDOW_RELOAD';
 
 export const SET_LOCATION = 'SET_LOCATION';
+
+export const UP_TO_GUEST_COUNT = 'UP_TO_GUEST_COUNT';
+export const DOWN_TO_GUEST_COUNT = 'DOWN_TO_GUEST_COUNT';
 
 export const clickSearchBar = () => ({
   type: CLICK_SEARCHBAR,
@@ -46,6 +50,14 @@ export const reLoadPage = () => ({
 export const setLocation = data => ({
   type: SET_LOCATION,
   data,
+});
+
+export const addCountGuest = () => ({
+  type: UP_TO_GUEST_COUNT,
+});
+
+export const decreseCountGuest = () => ({
+  type: DOWN_TO_GUEST_COUNT,
 });
 
 export default (state = initialState, action) => {
@@ -82,6 +94,14 @@ export default (state = initialState, action) => {
       }
       case SET_LOCATION: {
         draft.location = action.data;
+        break;
+      }
+      case UP_TO_GUEST_COUNT: {
+        draft.guestCount = draft.guestCount + 1;
+        break;
+      }
+      case DOWN_TO_GUEST_COUNT: {
+        draft.guestCount = draft.guestCount - 1;
         break;
       }
     }
