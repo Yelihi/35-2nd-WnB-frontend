@@ -12,7 +12,7 @@ import {
   reLoadPage,
 } from '../../reducers/nav';
 
-const BeforeSearch = ({ startDate, endDate }) => {
+const BeforeSearch = () => {
   const dispatch = useDispatch();
   const {
     isToken,
@@ -21,6 +21,7 @@ const BeforeSearch = ({ startDate, endDate }) => {
     location,
     guestCount,
   } = useSelector(state => state.nav);
+  const { start, end } = useSelector(state => state.nav.date);
   let uselocation = useLocation();
   let is_detail = uselocation.pathname;
 
@@ -51,12 +52,10 @@ const BeforeSearch = ({ startDate, endDate }) => {
               <Separation />
               <SmallSearchMenuContainer>
                 <Menu>
-                  {startDate && endDate
-                    ? `${
-                        startDate.getMonth() + 1
-                      }월 ${startDate.getDate()}일 ~ ${
-                        endDate.getMonth() + 1
-                      }월 ${endDate.getDate()}일`
+                  {start && end
+                    ? `${start.getMonth() + 1}월 ${start.getDate()}일 ~ ${
+                        end.getMonth() + 1
+                      }월 ${end.getDate()}일`
                     : '언제든 일주일'}
                 </Menu>
               </SmallSearchMenuContainer>

@@ -10,9 +10,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { clickSearchBar } from '../../reducers/nav';
 
-const Search = ({ startDate, endDate, onChange, modalRef }) => {
+const Search = ({ modalRef }) => {
   const dispatch = useDispatch();
   const { location, guestCount } = useSelector(state => state.nav);
+  const { start, end } = useSelector(state => state.nav.date);
   const [dateModalIsOpen, setDateModalIsOpen] = useState(false);
   const [locationModalIsOpen, setLocationModalIsOpen] = useState(false);
   const [guestModalIsOpen, setGuestModalIsOpen] = useState(false);
@@ -55,12 +56,10 @@ const Search = ({ startDate, endDate, onChange, modalRef }) => {
   const toSearchUserInfo = e => {
     e.stopPropagation();
 
-    const startDay = startDate
-      ? `&check_in=${toStringByFormatting(startDate, '-')}`
+    const startDay = start
+      ? `&check_in=${toStringByFormatting(start, '-')}`
       : '';
-    const endDay = endDate
-      ? `&check_out=${toStringByFormatting(endDate, '-')}`
-      : '';
+    const endDay = end ? `&check_out=${toStringByFormatting(end, '-')}` : '';
     const selectLocation = location ? `&address=${location}` : '';
     const totalGuest = guestCount ? `&maximum_occupancy=${guestCount}` : '';
 
@@ -80,8 +79,8 @@ const Search = ({ startDate, endDate, onChange, modalRef }) => {
   };
 
   const ModalComponent = {
-    1: <Location startDate={startDate} endDate={endDate} />,
-    2: <Calender startDate={startDate} endDate={endDate} onChange={onChange} />,
+    1: <Location />,
+    2: <Calender />,
     3: <GuestType disabled={disabled} />,
   };
 
@@ -103,7 +102,7 @@ const Search = ({ startDate, endDate, onChange, modalRef }) => {
         </WrapperLocationContainer>
         <WrapperDatePicker>
           <WrapperDatePickerInput
-            className={currentId === 2 && !endDate ? 'is_open' : null}
+            className={currentId === 2 && !end ? 'is_open' : null}
             onClick={() => {
               setDateModalIsOpen(true);
               clickHandler(2);
@@ -111,13 +110,13 @@ const Search = ({ startDate, endDate, onChange, modalRef }) => {
           >
             <DatePickerLabel>체크인</DatePickerLabel>
             <SearchBarSpan>
-              {startDate
-                ? `${startDate.getMonth() + 1}월 ${startDate.getDate()}일`
+              {start
+                ? `${start.getMonth() + 1}월 ${start.getDate()}일`
                 : '날짜 선택'}
             </SearchBarSpan>
           </WrapperDatePickerInput>
           <WrapperDatePickerInput
-            className={currentId === 2 && endDate ? 'is_open' : null}
+            className={currentId === 2 && end ? 'is_open' : null}
             onClick={() => {
               setDateModalIsOpen(true);
               clickHandler(2);
@@ -125,9 +124,7 @@ const Search = ({ startDate, endDate, onChange, modalRef }) => {
           >
             <DatePickerLabel>체크아웃</DatePickerLabel>
             <SearchBarSpan>
-              {endDate
-                ? `${endDate.getMonth() + 1}월 ${endDate.getDate()}일`
-                : '날짜 선택'}
+              {end ? `${end.getMonth() + 1}월 ${end.getDate()}일` : '날짜 선택'}
             </SearchBarSpan>
           </WrapperDatePickerInput>
         </WrapperDatePicker>

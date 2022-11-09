@@ -1,10 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { ko } from 'date-fns/locale';
 import styled, { createGlobalStyle } from 'styled-components';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const Calender = ({ startDate, endDate, onChange }) => {
+import { useDispatch } from 'react-redux';
+
+import { CHANGE_DATE } from '../../../reducers/nav';
+
+const Calender = () => {
+  const dispatch = useDispatch();
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+
+  const onChange = dates => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+    dispatch({
+      type: CHANGE_DATE,
+      data: { start: start, end: end },
+    });
+  };
+
   return (
     <ModalChecked>
       <DatePicker
