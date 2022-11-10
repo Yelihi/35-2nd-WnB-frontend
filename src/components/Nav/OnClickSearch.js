@@ -7,17 +7,14 @@ import ProfileLoginContainer from './modal/ProfileLoginContainer';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  clickSearchBar,
-  clickUserInfoButton,
-  reLoadPage,
-} from '../../reducers/nav';
+import { clickUserInfoButton, reLoadPage } from '../../reducers/nav';
+
+import { clickSearchBar } from '../../reducers/search';
 
 const OnClickSearch = ({ modalRef }) => {
   const dispatch = useDispatch();
-  const { isToken, isClickSearch, isClickUserInfoButton } = useSelector(
-    state => state.nav
-  );
+  const { isToken, isClickUserInfoButton } = useSelector(state => state.nav);
+  const { isClickSearch } = useSelector(state => state.search);
   let uselocation = useLocation();
   let is_detail = uselocation.pathname;
 

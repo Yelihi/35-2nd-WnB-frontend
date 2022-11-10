@@ -8,15 +8,12 @@ const initialState = {
     end: null,
   },
   isToken: false,
-  isClickSearch: true,
   isClickUserInfoButton: false,
   isOpenLoginModal: false,
 };
 
 export const TOKEN_EXIST = 'TOKEN_EXIST';
 export const TOKEN_DELETE = 'TOKEN_DELETE';
-
-export const CLICK_SEARCHBAR = 'CLICK_SEARCHBAR';
 
 export const CLICK_USER_INFO_BUTTON = 'CLICK_USER_INFO_BUTTON';
 
@@ -32,10 +29,6 @@ export const UP_TO_GUEST_COUNT = 'UP_TO_GUEST_COUNT';
 export const DOWN_TO_GUEST_COUNT = 'DOWN_TO_GUEST_COUNT';
 
 export const CHANGE_DATE = 'CHANGE_DATE';
-
-export const clickSearchBar = () => ({
-  type: CLICK_SEARCHBAR,
-});
 
 export const clickUserInfoButton = () => ({
   type: CLICK_USER_INFO_BUTTON,
@@ -75,10 +68,6 @@ export default (state = initialState, action) => {
       }
       case TOKEN_DELETE: {
         draft.isToken = false;
-        break;
-      }
-      case CLICK_SEARCHBAR: {
-        draft.isClickSearch = !draft.isClickSearch;
         break;
       }
       case CLICK_USER_INFO_BUTTON: {

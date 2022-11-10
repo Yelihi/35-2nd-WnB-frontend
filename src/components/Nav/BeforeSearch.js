@@ -6,22 +6,17 @@ import { fadeIn, shadow } from '../../styles/animation';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  clickSearchBar,
-  clickUserInfoButton,
-  reLoadPage,
-} from '../../reducers/nav';
+import { clickUserInfoButton, reLoadPage } from '../../reducers/nav';
+
+import { clickSearchBar } from '../../reducers/search';
 
 const BeforeSearch = () => {
   const dispatch = useDispatch();
-  const {
-    isToken,
-    isClickSearch,
-    isClickUserInfoButton,
-    location,
-    guestCount,
-  } = useSelector(state => state.nav);
+  const { isToken, isClickUserInfoButton, location, guestCount } = useSelector(
+    state => state.nav
+  );
   const { start, end } = useSelector(state => state.nav.date);
+  const { isClickSearch } = useSelector(state => state.search);
   let uselocation = useLocation();
   let is_detail = uselocation.pathname;
 
